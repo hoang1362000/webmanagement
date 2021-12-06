@@ -5,22 +5,29 @@
  */
 package controller;
 
-import dal.machineBuyDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.machineBuy;
+import model.Account;
 
 /**
  *
  * @author Admin
  */
-public class BuyController extends BasedAuthenticationController {
 
+public abstract class BasedAuthenticationController extends HttpServlet {
+    private boolean isAuthenticated(HttpServletRequest request){
+        Account account = (Account)request.getSession().getAttribute("acc");
+        if(account!=null){
+            return true;
+        }else{
+            return false;
+        }
+    }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -30,14 +37,6 @@ public class BuyController extends BasedAuthenticationController {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        machineBuyDAO mb = new machineBuyDAO();
-        ArrayList<machineBuy> machine = mb.list();
-        request.setAttribute("machine", machine);
-        request.getRequestDispatcher("buy.jsp").forward(request, response);
-    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -51,9 +50,18 @@ public class BuyController extends BasedAuthenticationController {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        if(isAuthenticated(request)){
+            processGet(request, response);
+        }else{
+            response.sendRedirect("login");
+        }
     }
 
+    protected abstract void processGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException;
+
+    protected abstract void processPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException;
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -65,7 +73,11 @@ public class BuyController extends BasedAuthenticationController {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        if(isAuthenticated(request)){
+            processPost(request, response);
+        }else{
+            response.sendRedirect("login");
+        }
     }
 
     /**
@@ -77,15 +89,5 @@ public class BuyController extends BasedAuthenticationController {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    @Override
-    protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    @Override
-    protected void processPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        processRequest(request, response);
-    }
 
 }

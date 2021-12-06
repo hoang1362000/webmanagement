@@ -19,7 +19,7 @@ import model.Providers;
  */
 public class ProvidersDAO extends DBContext {
 
-    public ArrayList<Providers> getallProvider() {
+    public ArrayList<Providers> list() {
         ArrayList<Providers> provider = new ArrayList<>();
         try {
             String sql = "select * from provider";

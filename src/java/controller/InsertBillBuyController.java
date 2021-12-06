@@ -5,12 +5,17 @@
  */
 package controller;
 
+import dal.ProvidersDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Providers;
 
 /**
  *
@@ -56,7 +61,13 @@ public class InsertBillBuyController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDateTime now = LocalDateTime.now();
+        request.setAttribute("datemax", dtf.format(now));
+        ProvidersDAO pd = new ProvidersDAO();
+        ArrayList<Providers> provider = pd.list();
+        request.setAttribute("provider", provider);
+        request.getRequestDispatcher("insertbillbuy.jsp").forward(request, response);
     }
 
     /**
