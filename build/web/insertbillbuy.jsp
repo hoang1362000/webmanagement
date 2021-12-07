@@ -29,10 +29,6 @@
                         <br>
                         <input type="date" name="date_input" max="${datemax}">
                         <br>
-                        Số tiền chưa trả
-                        <br>
-                        <input type="number" name="amount_owed" value=""/>
-                        <br>
                         Nhà cung cấp
                         <br>
                         <select name="provider_id">

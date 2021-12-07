@@ -16,6 +16,10 @@
         <servlet-name>InsertBillBuyController</servlet-name>
         <servlet-class>controller.InsertBillBuyController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>InsertBuyController</servlet-name>
+        <servlet-class>controller.InsertBuyController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>InsertBillBuyController</servlet-name>
         <url-pattern>/insertbillbuy</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InsertBuyController</servlet-name>
+        <url-pattern>/insertbuy</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
