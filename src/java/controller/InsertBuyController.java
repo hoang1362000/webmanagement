@@ -65,6 +65,27 @@ public class InsertBuyController extends BasedAuthenticationController {
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String raw_id_bill = request.getParameter("bill_id_new");
+        String raw_seri = request.getParameter("seri_product");
+        String raw_name_machine = request.getParameter("name_machine");
+        String raw_model = request.getParameter("model_machine");
+        String raw_price = request.getParameter("price_machine");
+        String raw_newness = request.getParameter("newness");
+        int raw_depreciation = Integer.parseInt(request.getParameter("depreciation"));
+        int id_bill = Integer.parseInt(raw_id_bill);
+        int newness = Integer.parseInt(raw_newness);
+        int price = Integer.parseInt(raw_price);
+        machineBuy mb = new machineBuy();
+        mb.setBillbuy_id(id_bill);
+        mb.setSeri(raw_seri);
+        mb.setModel(raw_model);
+        mb.setPrice(price);
+        mb.setName(raw_name_machine);
+        mb.setNewness(newness);
+        mb.setDepreciation(raw_depreciation);
+        machineBuyDAO md = new machineBuyDAO();
+        md.insert(mb);
+        response.sendRedirect("insertbuy?bill_id=" + id_bill);
     }
 
     /**

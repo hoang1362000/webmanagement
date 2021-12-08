@@ -18,7 +18,7 @@
             <br>
             Thuộc mã hóa đơn
             <br>
-            <select name="">
+            <select name="bill_id_new">
                 <option value="${lastbill}">${lastbill}</option>
                 <c:forEach items="${bill}" var="bb">
                     <option  value="${bb.id}">${bb.id}</option>
@@ -27,27 +27,27 @@
             <br>
             Mã Seri
             <br>
-            <input type="text" name=""/>
+            <input type="text" name="seri_product"/>
             <br>
             Tên thiết bị
             <br>
-            <input type="text" name=""/>
+            <input type="text" name="name_machine"/>
             <br>
             Mã phiên bản
             <br>
-            <input type="text" name=""/>
+            <input type="text" name="model_machine"/>
             <br>
             Giá mua
             <br>
-            <input type="number" name=""/>
+            <input type="number" name="price_machine"/>
             <br>
             Độ mới
             <br>
-            <input type="number" min="1" max="100" name=""/>
+            <input type="number" min="1" max="100" name="newness"/>
             <br>
             Hạn khấu hao(năm)
             <br>
-            <input type="number" name="" value="${machinebuy.depreciation}"/>
+            <input type="number" name="depreciation" value="${machinebuy.depreciation}"/>
             <br>
             <div style="margin-bottom: 10px">
                 <input  type="submit" value="Thêm và nhập máy mới"/>
