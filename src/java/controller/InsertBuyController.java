@@ -5,18 +5,23 @@
  */
 package controller;
 
+import dal.BillBuyDAO;
+import dal.machineBuyDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.BillBuy;
+import model.machineBuy;
 
 /**
  *
  * @author Admin
  */
-public class InsertBuyController extends HttpServlet {
+public class InsertBuyController extends BasedAuthenticationController {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -27,22 +32,7 @@ public class InsertBuyController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet InsertBuyController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet InsertBuyController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -54,9 +44,14 @@ public class InsertBuyController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        BillBuyDAO bb = new BillBuyDAO();
+        ArrayList<BillBuy> bbd = bb.getallBillBuy();
+        int raw_id_bill = Integer.parseInt(request.getParameter("bill_id"));
+        request.setAttribute("lastbill", raw_id_bill);
+        request.setAttribute("bill", bbd);
+        request.getRequestDispatcher("insertBuy.jsp").forward(request, response);
     }
 
     /**
@@ -68,9 +63,8 @@ public class InsertBuyController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
     }
 
     /**
