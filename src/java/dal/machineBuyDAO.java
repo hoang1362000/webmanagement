@@ -137,6 +137,17 @@ public class machineBuyDAO extends DBContext {
         } catch (SQLException ex) {
             Logger.getLogger(machineBuyDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
 
+    public void delete(String seri) {
+        try {
+            String sql = "DELETE FROM [listBuy]\n"
+                    + "      WHERE Seri = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, seri);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(machineBuyDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

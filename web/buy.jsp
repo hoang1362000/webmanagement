@@ -36,6 +36,7 @@
                     <td><h4 style="font-family:Tim New Rone;"><b>Ngày nhập</b></h4></td>
                     <td><h4 style="font-family:Tim New Rone;"><b>Nhà cung cấp</b></h4></td>
                     <td></td>
+                    <td></td>
                 </tr>
             </thead>
             <tbody>
@@ -50,6 +51,10 @@
                     <td>
                         <input type="button" value="Edit" 
                                onclick="window.location.href = 'edit?seri=<%=m.getSeri()%>'" />
+                    </td>
+                    <td>
+                        <input type="button" value="Delete" 
+                               onclick="window.location.href = 'delete?seri=<%=m.getSeri()%>'" />
                     </td>
                 </tr>
                 <%}%>
