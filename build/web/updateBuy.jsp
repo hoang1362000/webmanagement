@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,6 +14,20 @@
         <title>Update Bill Detail</title>
     </head>
     <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="listbuy">Trang chủ</a>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">                                                          
+                </ul>
+                <div class="form-inline my-2 my-lg-0">
+                    <c:if test="${sessionScope.acc != null}">
+                        <p class="navbar-brand">Xin chào, ${sessionScope.acc.username} 
+                            <a href="logout" style="color: blue; margin-left: 10px">Đăng xuất</a></p>
+                        </c:if>
+                </div>
+            </div>
+        </nav>
+    <center>
         <form action="edit" method="POST">
             <h1 >Sửa thông tin thiết bị</h1>
             <br>
@@ -51,8 +66,9 @@
             <br>
             <input type="number" name="depreciation" value="${machinebuy.depreciation}"/>
             <br>
-            <input type="submit" value="Lưu thay đổi"/>
+            <input class="btn btn-outline-success" type="submit" value="Lưu thay đổi"/>
             <a href="listbuy" class="btn btn-danger">Hủy</a>
         </form>
-    </body>
+    </center>
+</body>
 </html>
