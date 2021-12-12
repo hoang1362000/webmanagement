@@ -37,6 +37,7 @@ public class BuyController extends BasedAuthenticationController {
         ArrayList<machineBuy> machine = mb.list();
         request.setAttribute("machine", machine);
         request.getRequestDispatcher("buy.jsp").forward(request, response);
+        //response.sendRedirect("buy.jsp");
     }
     public String getServletInfo() {
         return "Short description";
